@@ -1,0 +1,11 @@
+mixin loginForm()
+    .row
+      h1 Sign in
+      hr
+    .center
+      form(action="/login" method="POST")
+        .group
+          input(name="email" type="email" class="form-control" placeholder="Email...")
+        .group
+          input(name="password" type="password" class="form-control" placeholder="Password...")
+        button.btn.btn-primary.btn-block(type="submit") Sign In

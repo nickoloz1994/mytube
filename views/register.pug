@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .row
+      h1 Registration
+      <hr>
+    .center
+      form(action="/register" method="POST")
+        .form-group
+          label(for="name") Name
+          input.form-control(id="name" name="name" type="text" placeholder="Name...")
+        .form-group
+          label(for="email") Email
+          input.form-control(id="email" name="email" type="email" placeholder="Email...")
+        .form-group
+          label(for="password") Password
+          input.form-control(id="password" name="password" type="password" placeholder="Password...")
+        .form-group
+          label(for="confirm-password") Confirm Password
+          input.form-control(id="confirm-password" name="confirm-password" type="password" placeholder="Confirm password...")
+        button.btn.btn-lg.btn-primary.btn-block(type="submit") Register

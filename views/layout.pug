@@ -1,0 +1,44 @@
+doctype html
+html
+    head
+        title= `${title} | ${h.siteName}`
+        link(rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" 
+            integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous")
+        link(href="https://fonts.googleapis.com/css?family=Oswald:700" rel="stylesheet")
+        link(rel="stylesheet" href="/dist/style.css")
+        script(src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js")
+        script(src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous")
+    body
+        block header
+            nav.navbar.navbar-default(role="navigation")
+              .container-fluid
+                .navbar-header
+                  button.navbar-toggle(type="button" data-toggle="collapse" data-target="#myNavbar")
+                    span.icon-bar
+                    span.icon-bar
+                    span.icon-bar 
+                  a.navbar-brand(href="/videos" style={padding: '0px'}): img.img-thumbnail.logo(src="http://i64.tinypic.com/245yav4.png" width="146" height="50.4")
+                .collapse.navbar-collapse(id="myNavbar")
+                  ul.nav.navbar-nav
+                    each item in h.menu
+                        li.active
+                            a(href=item.slug) #{item.title}
+                  form.navbar-form.navbar-left.search-form(role="search")
+                    .input-group
+                      input(type="text" class="form-control" placeholder="Search...")
+                      .input-group-btn
+                        button.btn.btn-default(type="submit")
+                          i.glyphicon.glyphicon-search
+                  ul.nav.navbar-nav.navbar-right
+                    if user
+                        li: a(href="/add"): span.glyphicon.glyphicon-open
+                        li: a(href="/logout"): span.glyphicon.glyphicon-off 
+                        li: a(href="/profile" style={padding: '7px'}): img(src=`http://api.adorable.io/avatar/${user.name}` class="img-rounded" width="35" height="35")
+                    else
+                        li: a(href="/register") Register 
+                          span.glyphicon.glyphicon-user
+                        li: a(href="/login") Login 
+                          span.glyphicon.glyphicon-log-in
+            .container
+                block content

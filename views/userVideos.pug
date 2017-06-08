@@ -1,0 +1,8 @@
+extends layout
+
+include mixins/_videoPanel
+
+block content
+    h2 My videos
+    each video in videos
+        +videoPanel(video)

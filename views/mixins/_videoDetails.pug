@@ -1,0 +1,10 @@
+mixin videoDetails(video = {})
+    video(width="640" height="390" controls poster=`/uploads/${video.poster}`)
+      source(src=`/uploads/${video.video}` type="video/mp4")
+    .row
+      .col-md-12
+        .panel.panel-default
+          .panel-heading
+            h2= video.title
+          .panel-body
+            h5= video.description

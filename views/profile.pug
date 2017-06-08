@@ -1,0 +1,21 @@
+extends layout
+
+block content
+    .row
+        block menu
+            .col-xs-12.col-sm-12.col-md-3
+                .list-group
+                    a.list-group-item(href=`/profile/${user._id}/videos`) My Videos 
+                        span.glyphicon.glyphicon-play-circle
+        block profile
+            .col-xs-12.col-sm-12.col-md-8
+                img.img-thumbnail(src=`http://api.adorable.io/avatar/${user.name}` width="304" height="236")
+                .col-xs-12.col-sm-12.col-md-12
+                    form(action="/profile" method="POST")
+                        .form-group
+                            label(for="name") Name
+                            input.form-control(name="name" id="name" type="text" value=user.name)
+                        .form-group
+                            label(for="email") Email
+                            input.form-control(name="email" id="email" type="email" value=user.email)
+                        input.btn.btn-primary.btn-block(type="submit" value="Update settings")

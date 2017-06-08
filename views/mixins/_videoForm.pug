@@ -1,0 +1,16 @@
+mixin videoForm(video = {})
+    .center
+        form(action=`/add/${video._id || ''}` method="POST" enctype="multipart/form-data")
+            .form-group
+                label(for="title") Title
+                input.form-control(type="text" name="title" id="title" value=video.title)
+            .form-group
+                label(for="description") Description
+                textarea.form-control(name="description" id="description" rows="5")= video.description
+            .form-group
+                label(for="video") Video
+                input(type="file" name="video" id="video" accept="video/*")
+            .form-group
+                label(for="poster") Poster
+                input(type="file" name="poster" id="poster" accept="image/*")
+            input(type="submit" value="Save" class="btn btn-primary btn-block")
