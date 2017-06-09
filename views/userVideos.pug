@@ -1,8 +1,8 @@
 extends layout
 
-include mixins/_videoPanel
+include mixins/_userVideoPanel
 
 block content
     h2 My videos
     each video in videos
-        +videoPanel(video)
+        +userVideoPanel(video)

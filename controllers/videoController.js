@@ -3,6 +3,7 @@ const multer = require('multer');
 const uuid = require('uuid');
 const {Video} = require('./../models/Video');
 const notifier = require('node-notifier');
+const fs = require('fs');
 
 // we provide fields array for multer to get files form two form fields 'video' and 'poster'
 const multerFields = [
@@ -43,7 +44,7 @@ exports.getVideos = (req, res) => {
 
 // render page for adding videos
 exports.addVideo = (req, res) => {
-    res.render('editVideo', {title: 'Add video'});
+    res.render('editVideo', {title: 'Add'});
 };
 
 // upload function which uses multer for file uploads
@@ -82,7 +83,7 @@ exports.updateVideo = (req, res) => {
 exports.editVideo = (req, res) => {
     var id = req.params.id;
     Video.findOne({_id: id}).then((video) => {
-        res.render('editVideo', {title: `Edit video`,video});
+        res.render('editVideo', {title: `Edit`,video});
     }).catch((err) =>{
         res.status(400).send(err);
     });
@@ -102,7 +103,7 @@ exports.getUserVideos = (req, res) => {
     const id = req.params.id;
 
     Video.find({author: id}).then((videos) => {
-        res.render('userVideos', {videos});
+        res.render('userVideos', {title: 'My Videos',videos});
     }).catch((err) => {
         notifier.notify('No videos found');
     });
@@ -116,6 +117,8 @@ exports.removeVideo = (req, res) => {
         _id: id,
         author: req.user._id
     }).then((video) => {
+        fs.unlink(`public/uploads/${video.video}`);
+        fs.unlink(`public/uploads/${video.poster}`);
         notifier.notify('Successfully deleted the video');
         res.redirect('/videos');
     }).catch((err) => {

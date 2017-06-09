@@ -1,18 +1,9 @@
 mixin videoPanel(video = {})
   .col-sm-6.col-md-4
     .thumbnail
-      .row
-        div(class=(user ? 'col-xs-10 col-sm-10 col-md-10' : 'col-xs-12 col-sm-12 col-md-12'))
-          a(href=`/videos/${video._id}`)
-            video(width="350" poster=`/uploads/${video.poster}`)
-              source(src=`/uploads/${video.video}` type="video/mp4")
-        div(class=(user ? 'col-xs-2 col-sm-2 col-md-2' : '') style={padding: 0})
-          if user
-            a.btn.btn-default.btn-sm(href=`/videos/${video._id}/edit` style={margin: "2px"})
-              span.glyphicon.glyphicon-pencil
-            form(action=`/remove/${video._id}` method="POST")
-              button.btn.btn-danger.btn-sm(type="submit" style={margin: "2px"})
-                span.glyphicon.glyphicon-remove
+      a(href=`/videos/${video._id}`)
+        video(width="350" poster=`/uploads/${video.poster}`)
+          source(src=`/uploads/${video.video}` type="video/mp4")
       p.fit  
         a(href=`/videos/${video.video}`) #{video.title}
       
