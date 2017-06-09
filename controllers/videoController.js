@@ -35,11 +35,15 @@ const multerOptions = {
 
 // render main page for videos
 exports.getVideos = (req, res) => {
-    Video.find().then((videos) => {
-        res.render('videos', {title: 'Videos', videos});
-    }).catch((err) => {
-        res.send(err);
-    });
+    if(req.user) {
+        Video.find().then((videos) => {
+            res.render('videos', {title: 'Videos', videos});
+        }).catch((err) => {
+            res.send(err);
+        });
+    } else {
+        res.render('login', {title: 'Login'});
+    }    
 };
 
 // render page for adding videos
